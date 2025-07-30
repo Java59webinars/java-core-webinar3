@@ -49,15 +49,8 @@ public class Main {
             int digit = Character.getNumericValue(idNumber.charAt(i));
             int multiplier = i%2 + 1;
             int product = digit * multiplier;
-
-            if (product > 9) {
-                int breakdown = product / 10 + product % 10;
-                checkSum += breakdown;
-            } else {
-                checkSum += product;
-            }
+            checkSum += product / 10 + product % 10;
         }
-        int controlDigit = (10 - (checkSum % 10)) % 10;
-        return controlDigit;
+        return (10 - (checkSum % 10)) % 10;
     }
 }
