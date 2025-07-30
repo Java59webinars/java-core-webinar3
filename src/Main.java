@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
     //    int[] multipliers = {1, 2, 1, 2, 1, 2, 1, 2};
     //31175641, 5326146208680741
         Scanner scanner = new Scanner(System.in);
@@ -19,28 +18,22 @@ public class Main {
             System.out.println("Error: The number should have 16 digits.");
             return;
         }
+        String correctMessage = "Correct number";
+        String errorMessage = "Error: Incorrect check sum";
+        System.out.println( isCardNumberValid(cardNumber)?correctMessage :errorMessage );
+        isCardNumberValid(cardNumber);
+    }
 
-//        int sum = 0;
-//        for (int i = cardNumber.length() - 1; i >= 0; i--) {
-//            int positionFromRight = cardNumber.length() - i;
-//            int digit = Character.getNumericValue(cardNumber.charAt(i));
-//
-//            if (positionFromRight % 2 == 0) {
-//                int product = digit * 2;
-//                sum += (product > 9) ? product - 9 : product;
-//            } else {
-//
-//                sum += digit;
-//            }
-//        }
-//
-//        if (sum % 10 == 0) {
-//            System.out.println("Incorrect number. Check sum: " + sum);
-//        } else {
-//            System.out.println("Error: check sum " + sum + " should have 0 in the end.");
-//        }
-
-
+    private static boolean isCardNumberValid(String cardNumber) {
+        int checkSum = 0;
+        for (int i = cardNumber.length() - 1; i >= 0; i--) {
+            int positionFromRight = cardNumber.length() - i;
+            int digit = Character.getNumericValue(cardNumber.charAt(i));
+            int multiplier = 2 - i%2;
+            int product = digit * multiplier;
+            checkSum += product / 10 + product % 10;
+        }
+        return (checkSum % 10 == 0)? true : false;
     }
 
     private static int getTeudatZeutControlDigit(String idNumber) {
